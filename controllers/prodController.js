@@ -60,19 +60,31 @@ function update(req, res) {
             message: "Ricetta non trovata"
         })
     }
-    // va a sostituire i vecchi dati con i nuovi
+    
     post.title = req.body.title;
     post.content = req.body.content;
     post.image = req.body.image;
     post.tags = req.body.tags;
 
-    console.log("Ricetta Modificata", ricetta, "Array modificato", recipe);
-
     res.json(post).sendStatus(200);
 }
 
 function modify(req, res) {
-    res.send('Modifica parziale' + req.params.id);
+    const post = post.find((i) => i.id === parseInt(req.params.id));
+
+    if (!post) {
+        return res.status(404).json({
+            error: "Not Found",
+            message: "Ricetta non trovata"
+        })
+    }
+
+    req.body.title ? post.title = req.body.title : post.title = post.title;
+    req.body.content ? post.content = req.body.content : post.content = post.content;
+    req.body.image ? post.image = req.body.image : post.image = post.image;
+    req.body.tags ? post.tags = req.body.tags : post.tags = post.tags;
+
+    res.json(post).sendStatus(200);
 }
 
 function destroy(req, res) {
