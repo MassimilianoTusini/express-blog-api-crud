@@ -66,7 +66,7 @@ function update(req, res) {
     post.image = req.body.image;
     post.tags = req.body.tags;
 
-    res.json(post).sendStatus(200);
+    res.status(200).json(post);
 }
 
 function modify(req, res) {
@@ -84,7 +84,7 @@ function modify(req, res) {
     req.body.image ? post.image = req.body.image : post.image = post.image;
     req.body.tags ? post.tags = req.body.tags : post.tags = post.tags;
 
-    res.json(post).sendStatus(200);
+    res.json(post);
 }
 
 function destroy(req, res) {

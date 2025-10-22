@@ -10,6 +10,11 @@ const postRouter = require("./routers/posts")
 // Middleware per servire file statici 
 app.use(express.static("public"));
 
+// Importo i Middleware
+const notFound = require("./middlewares/notFound")
+// Utilizzo il Middleware
+app.use(notFound)
+
 // Creazione Body parser 
 server.use(express.json());
 
