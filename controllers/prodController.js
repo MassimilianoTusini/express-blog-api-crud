@@ -36,7 +36,19 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    res.send('Creazione nuova ricetta');
+    const newId = post[post.length - 1].id + 1;
+
+    const NewPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+
+    recipe.push(NewPost);
+
+    res.status(201).json(NewPost);
 }
 
 function update(req, res) {

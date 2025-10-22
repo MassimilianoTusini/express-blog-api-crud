@@ -8,8 +8,10 @@ const port = 3000;
 const postRouter = require("./routers/posts")
 
 // Middleware per servire file statici 
-
 app.use(express.static("public"));
+
+// Creazione Body parser 
+server.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("<h1>I nostri prodotti caserecci</h1>")
