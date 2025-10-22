@@ -46,13 +46,29 @@ function store(req, res) {
         tags: req.body.tags
     }
 
-    recipe.push(NewPost);
+    post.push(NewPost);
 
     res.status(201).json(NewPost);
 }
 
 function update(req, res) {
-    res.send('Modifica integrale' + req.params.id);
+    const post = post.find((i) => i.id === parseInt(req.params.id));
+
+    if (!post) {
+        return res.status(404).json({
+            error: "Not Found",
+            message: "Ricetta non trovata"
+        })
+    }
+    // va a sostituire i vecchi dati con i nuovi
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    console.log("Ricetta Modificata", ricetta, "Array modificato", recipe);
+
+    res.json(post).sendStatus(200);
 }
 
 function modify(req, res) {
